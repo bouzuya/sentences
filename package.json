@@ -1,0 +1,23 @@
+{
+  "name": "sentences",
+  "description": "sentences",
+  "version": "1.0.0",
+  "author": {
+    "name": "bouzuya",
+    "email": "m@bouzuya.net",
+    "url": "http://bouzuya.net"
+  },
+  "bugs": {
+    "url": "https://github.com/bouzuya/sentences/issues"
+  },
+  "homepage": "https://github.com/bouzuya/sentences",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bouzuya/sentences"
+  },
+  "scripts": {
+    "test": "gulp test"
+  }
+}
