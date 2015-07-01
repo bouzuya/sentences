@@ -24,6 +24,18 @@ gulp.task 'build', (done) ->
 gulp.task 'build(dev)', (done) ->
   run 'build:coffee(dev)', 'build:js(dev)', done
 
+gulp.task 'build:coffee', ->
+  gulp.src './src/**/*.coffee'
+  .pipe coffee()
+  .pipe gulp.dest './.tmp/src/'
+
+gulp.task 'build:coffee(dev)', ->
+  gulp.src './src/**/*.coffee'
+  .pipe sourcemaps.init()
+  .pipe ignoreError coffee()
+  .pipe sourcemaps.write()
+  .pipe gulp.dest './.tmp/src/'
+
 gulp.task 'build:js', ->
   b = browserify
     entries: ['./.tmp/src/index.js']
@@ -44,18 +56,6 @@ gulp.task 'build:js(dev)', ->
   .pipe sourcemaps.init loadMaps: true
   .pipe sourcemaps.write './'
   .pipe gulp.dest './lib/'
-
-gulp.task 'build:coffee', ->
-  gulp.src './src/**/*.coffee'
-  .pipe coffee()
-  .pipe gulp.dest './.tmp/src/'
-
-gulp.task 'build:coffee(dev)', ->
-  gulp.src './src/**/*.coffee'
-  .pipe sourcemaps.init()
-  .pipe ignoreError coffee()
-  .pipe sourcemaps.write()
-  .pipe gulp.dest './.tmp/src/'
 
 gulp.task 'build-test', ->
   gulp.src './test/**/*.coffee'
