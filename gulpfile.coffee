@@ -15,11 +15,12 @@ watch = require 'gulp-watch'
 watchify = require 'watchify'
 
 dirs =
-  dist: './lib/'
-  src: './src/'
-  test: './test/'
-  tmpSrc: './.tmp/src/'
-  tmpTest: './.tmp/test/'
+  app: './app/'           # html and other resource files
+  dist: './dist/'         # html, bundled javascript and other resource files
+  src: './src/'           # coffee-script files
+  test: './test/'         # coffee-script files for testing
+  tmpSrc: './.tmp/src/'   # compiled javascript files
+  tmpTest: './.tmp/test/' # compiled javascript files for testing
 
 ignoreError = (stream) ->
   stream.on 'error', (e) ->
