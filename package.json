@@ -11,6 +11,7 @@
     "url": "https://github.com/bouzuya/sentences/issues"
   },
   "devDependencies": {
+    "browser-sync": "^2.7.13",
     "coffee-script": "^1.9.3",
     "del": "^1.2.0",
     "gulp": "^3.9.0",

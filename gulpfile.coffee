@@ -1,4 +1,5 @@
 browserify = require 'browserify'
+browserSync = require 'browser-sync'
 buffer = require 'vinyl-buffer'
 coffee = require 'gulp-coffee'
 del = require 'del'
@@ -107,6 +108,10 @@ gulp.task 'watch', ['build(dev)'], ->
       ->
     ]
 
+  browserSync
+    server:
+      baseDir: './lib/'
+
   options =
     cache: {}
     packageCache: {}
@@ -123,6 +128,7 @@ gulp.task 'watch', ['build(dev)'], ->
     .pipe sourcemaps.init loadMaps: true
     .pipe sourcemaps.write './'
     .pipe gulp.dest './lib/'
+    browserSync.reload()
 
   w.on 'update', bundle
   w.on 'log', gutil.log.bind(gutil)
