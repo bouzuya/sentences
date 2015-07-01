@@ -14,6 +14,13 @@ uglify = require 'gulp-uglify'
 watch = require 'gulp-watch'
 watchify = require 'watchify'
 
+dirs =
+  dist: './lib/'
+  src: './src/'
+  test: './test/'
+  tmpSrc: './.tmp/src/'
+  tmpTest: './.tmp/test/'
+
 ignoreError = (stream) ->
   stream.on 'error', (e) ->
     gutil.log e
@@ -26,58 +33,59 @@ gulp.task 'build(dev)', (done) ->
   run 'build:coffee(dev)', 'build:js(dev)', done
 
 gulp.task 'build:coffee', ->
-  gulp.src './src/**/*.coffee'
+  gulp.src dirs.src + '**/*.coffee'
   .pipe coffee()
-  .pipe gulp.dest './.tmp/src/'
+  .pipe gulp.dest dirs.tmpSrc
 
 gulp.task 'build:coffee(dev)', ->
-  gulp.src './src/**/*.coffee'
+  gulp.src dirs.src + '**/*.coffee'
   .pipe sourcemaps.init()
   .pipe ignoreError coffee()
   .pipe sourcemaps.write()
-  .pipe gulp.dest './.tmp/src/'
+  .pipe gulp.dest dirs.tmpSrc
 
 gulp.task 'build:js', ->
   b = browserify
-    entries: ['./.tmp/src/index.js']
+    entries: [dirs.tmpSrc + 'index.js']
     debug: false
   b.bundle()
   .pipe source 'bundle.js'
   .pipe buffer()
   .pipe uglify()
-  .pipe gulp.dest './lib/'
+  .pipe gulp.dest dirs.dist
 
 gulp.task 'build:js(dev)', ->
   b = browserify
-    entries: ['./.tmp/src/index.js']
+    entries: [dirs.tmpSrc + 'index.js']
     debug: true
   b.bundle()
   .pipe source 'bundle.js'
   .pipe buffer()
   .pipe sourcemaps.init loadMaps: true
   .pipe sourcemaps.write './'
-  .pipe gulp.dest './lib/'
+  .pipe gulp.dest dirs.dist
 
 gulp.task 'build-test', ->
-  gulp.src './test/**/*.coffee'
+  gulp.src dirs.test + '**/*.coffee'
   .pipe sourcemaps.init()
   .pipe coffee()
   .pipe espower()
   .pipe sourcemaps.write()
-  .pipe gulp.dest './.tmp/test/'
+  .pipe gulp.dest dirs.tmpTest
 
 gulp.task 'build-test(dev)', ->
-  gulp.src './test/**/*.coffee'
+  gulp.src dirs.test + '**/*.coffee'
   .pipe sourcemaps.init()
   .pipe ignoreError coffee()
   .pipe ignoreError espower()
   .pipe sourcemaps.write()
-  .pipe gulp.dest './.tmp/test/'
+  .pipe gulp.dest dirs.tmpTest
 
 gulp.task 'clean', (done) ->
   del [
-    './.tmp/'
-    './lib/'
+    dirs.tmpSrc
+    dirs.tmpTest
+    dirs.dist
   ], done
   null
 
@@ -90,17 +98,17 @@ gulp.task 'default', (done) ->
   null
 
 gulp.task 'test', ['build', 'build-test'], ->
-  gulp.src './.tmp/test/**/*.js'
+  gulp.src dirs.tmpTest + '**/*.js'
   .pipe mocha()
 
 gulp.task 'test(dev)', ['build-test(dev)'], ->
-  gulp.src './.tmp/test/**/*.js'
+  gulp.src dirs.tmpTest + '**/*.js'
   .pipe ignoreError mocha()
 
 gulp.task 'watch', ['build(dev)'], ->
   watch [
-    './src/**/*.coffee'
-    './test/**/*.coffee'
+    dirs.src + '**/*.coffee'
+    dirs.test + '**/*.coffee'
   ], ->
     run.apply run, [
       'build:coffee(dev)'
@@ -115,7 +123,7 @@ gulp.task 'watch', ['build(dev)'], ->
   options =
     cache: {}
     packageCache: {}
-    entries: ['./.tmp/src/index.js']
+    entries: [dirs.tmpSrc + 'index.js']
     debug: true
   b = browserify options
   w = watchify b
@@ -127,7 +135,7 @@ gulp.task 'watch', ['build(dev)'], ->
     .pipe buffer()
     .pipe sourcemaps.init loadMaps: true
     .pipe sourcemaps.write './'
-    .pipe gulp.dest './lib/'
+    .pipe gulp.dest dirs.dist
     browserSync.reload()
 
   w.on 'update', bundle
