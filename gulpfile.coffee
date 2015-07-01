@@ -123,7 +123,7 @@ gulp.task 'watch', ['build(dev)'], ->
 
   browserSync
     server:
-      baseDir: './lib/'
+      baseDir: dirs.dist
 
   options =
     cache: {}
