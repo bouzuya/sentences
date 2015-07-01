@@ -28,10 +28,10 @@ ignoreError = (stream) ->
     @emit 'end'
 
 gulp.task 'build', (done) ->
-  run 'build:coffee', 'build:js', done
+  run 'build:html', 'build:coffee', 'build:js', done
 
 gulp.task 'build(dev)', (done) ->
-  run 'build:coffee(dev)', 'build:js(dev)', done
+  run 'build:html', 'build:coffee(dev)', 'build:js(dev)', done
 
 gulp.task 'build:coffee', ->
   gulp.src dirs.src + '**/*.coffee'
@@ -44,6 +44,10 @@ gulp.task 'build:coffee(dev)', ->
   .pipe ignoreError coffee()
   .pipe sourcemaps.write()
   .pipe gulp.dest dirs.tmpSrc
+
+gulp.task 'build:html', ->
+  gulp.src dirs.app + 'index.html'
+  .pipe gulp.dest dirs.dist
 
 gulp.task 'build:js', ->
   b = browserify
