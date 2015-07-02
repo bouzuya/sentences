@@ -1,14 +1,20 @@
+class Sentence
+  constructor: (@text) ->
+
+  getText: ->
+    @text
+
 class Controller
   constructor: ->
     @sentence = null
     @sentences = [
-      sentence: 'This is a pen.'
+      new Sentence('This is a pen.')
     ,
-      sentence: 'That is two bananas.'
+      new Sentence('That is two bananas.')
     ]
 
   add: ->
-    @sentences.push sentence: @sentence
+    @sentences.push new Sentence(@sentence)
     @sentence = null
 
 module.exports = ->
