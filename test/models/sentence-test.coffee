@@ -9,3 +9,14 @@ describe 'Sentence', ->
 
     it 'works', ->
       assert @sentence.getText() is @text
+
+  describe '#getWords', ->
+    beforeEach ->
+      @sentence = new Sentence('I am bouzuya.')
+
+    it 'works', ->
+      assert.deepEqual @sentence.getWords(), [
+        'I'
+        'am'
+        'bouzuya'
+      ]
