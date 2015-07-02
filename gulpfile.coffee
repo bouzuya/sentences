@@ -1,3 +1,4 @@
+angularTemplateCache = require 'gulp-angular-templatecache'
 browserify = require 'browserify'
 browserSync = require 'browser-sync'
 buffer = require 'vinyl-buffer'
@@ -28,10 +29,22 @@ ignoreError = (stream) ->
     @emit 'end'
 
 gulp.task 'build', (done) ->
-  run 'build:html', 'build:coffee', 'build:js', done
+  run.apply run, [
+    'build:template'
+    'build:html'
+    'build:coffee'
+    'build:js'
+    done
+  ]
 
 gulp.task 'build(dev)', (done) ->
-  run 'build:html', 'build:coffee(dev)', 'build:js(dev)', done
+  run.apply run, [
+    'build:template'
+    'build:html'
+    'build:coffee(dev)'
+    'build:js(dev)'
+    done
+  ]
 
 gulp.task 'build:coffee', ->
   gulp.src dirs.src + '**/*.coffee'
@@ -69,6 +82,15 @@ gulp.task 'build:js(dev)', ->
   .pipe sourcemaps.init loadMaps: true
   .pipe sourcemaps.write './'
   .pipe gulp.dest dirs.dist
+
+gulp.task 'build:template', ->
+  gulp.src dirs.app + '**/*.html'
+  .pipe angularTemplateCache
+    moduleSystem: 'Browserify'
+    module: 'templates'
+    root: '/'
+    standalone: true
+  .pipe gulp.dest dirs.tmpSrc
 
 gulp.task 'build-test', ->
   gulp.src dirs.test + '**/*.coffee'
@@ -118,6 +140,15 @@ gulp.task 'watch', ['build(dev)'], ->
     run.apply run, [
       'build:coffee(dev)'
       'test(dev)'
+      ->
+    ]
+
+  watch [
+    dirs.app + '**/*.html'
+  ], ->
+    run.apply run, [
+      'build:html'
+      'build:template'
       ->
     ]
 
