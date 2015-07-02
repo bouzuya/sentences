@@ -1,3 +1,15 @@
+# sentence
+
+## Note
+
+- Language: CoffeeScript / HTML
+- Framework: AngularJS 1.4
+- Package Manager: npm
+- Build: gulp / browserify
+- Test: mocha / power-assert
+
+See: `[package.json](package.json)`
+
 ## License
 
 [MIT](LICENSE)
