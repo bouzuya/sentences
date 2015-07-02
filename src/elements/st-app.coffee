@@ -1,8 +1,4 @@
-class Sentence
-  constructor: (@text) ->
-
-  getText: ->
-    @text
+{Sentence} = require '../models/sentence'
 
 class Controller
   constructor: ->
