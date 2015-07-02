@@ -1,6 +1,6 @@
 class Controller
   constructor: ->
-    console.log 'OK'
+    @message = 'Hello, AngularJS!'
 
 module.exports = ->
   bindToController: true
