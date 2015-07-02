@@ -8,4 +8,4 @@ module.exports = ->
   controllerAs: 'c'
   restrict: 'E'
   scope: {}
-  template: '<p>Hello, AngularJS</p>'
+  templateUrl: '/elements/st-app.html'

@@ -1,5 +1,7 @@
 require 'angular'
 
 angular
-.module 'app', []
+.module 'app', [
+  require('./templates').name
+]
 .directive 'stApp', require './elements/st-app'
