@@ -4,7 +4,10 @@
   </h1>
 </header>
 <div class="content">
-  <p ng-bind="c.message"></p>
+  <form>
+    <input ng-model="c.sentence" />
+    <button ng-click="c.add()">Add</button>
+  </form>
   <ul class="sentence-list">
     <li
       class="sentence-list-item"
