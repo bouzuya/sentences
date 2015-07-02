@@ -14,6 +14,14 @@
       ng-repeat="i in c.sentences"
       >
       <span ng-bind="i.getText()"></span>
+      <ul class="word-list">
+        <li
+          class="word-list-item"
+          ng-repeat="j in i.getWords()"
+          >
+          <span ng-bind="j"></span>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>
