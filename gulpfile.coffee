@@ -172,7 +172,8 @@ gulp.task 'watch', ['build(dev)'], ->
     .pipe sourcemaps.init loadMaps: true
     .pipe sourcemaps.write './'
     .pipe gulp.dest dirs.dist
-    browserSync.reload()
+    .on 'end', ->
+      browserSync.reload()
 
   w.on 'update', bundle
   w.on 'log', gutil.log.bind(gutil)
