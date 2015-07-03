@@ -3,6 +3,7 @@
 class Controller
   constructor: ->
     @sentence = null
+    @translated = null
     @sentences = [
       new Sentence('This is a pen.', 'これはペンです。')
     ,
@@ -10,8 +11,9 @@ class Controller
     ]
 
   add: ->
-    @sentences.push new Sentence(@sentence, '')
+    @sentences.push new Sentence(@sentence, @translated)
     @sentence = null
+    @translated = null
 
 module.exports = ->
   bindToController: true

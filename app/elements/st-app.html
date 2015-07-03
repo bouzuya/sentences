@@ -5,7 +5,14 @@
 </header>
 <div class="content">
   <form>
-    <input ng-model="c.sentence" />
+    <div class="form-control">
+      <label>Text</label>
+      <input ng-model="c.sentence" />
+    </div>
+    <div class="form-control">
+      <label>Translated Text</label>
+      <input ng-model="c.translated" />
+    </div>
     <button ng-click="c.add()">Add</button>
   </form>
   <st-sentence-list model="c.sentences">
