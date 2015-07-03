@@ -4,13 +4,13 @@ class Controller
   constructor: ->
     @sentence = null
     @sentences = [
-      new Sentence('This is a pen.')
+      new Sentence('This is a pen.', 'これはペンです。')
     ,
-      new Sentence('That is two bananas.')
+      new Sentence('That is two bananas.', 'あれは2本のバナナです。')
     ]
 
   add: ->
-    @sentences.push new Sentence(@sentence)
+    @sentences.push new Sentence(@sentence, '')
     @sentence = null
 
 module.exports = ->

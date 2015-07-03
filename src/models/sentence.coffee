@@ -1,8 +1,11 @@
 class Sentence
-  constructor: (@text) ->
+  constructor: (@text, @translated) ->
 
   getText: ->
     @text
+
+  getTranslatedText: ->
+    @translated
 
   getWords: ->
     s = @text

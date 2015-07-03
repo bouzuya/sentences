@@ -10,6 +10,15 @@ describe 'Sentence', ->
     it 'works', ->
       assert @sentence.getText() is @text
 
+  describe '#getTranslatedText', ->
+    beforeEach ->
+      @text = 'I am bouzuya.'
+      @translated = 'ぼくはぼうずやです。'
+      @sentence = new Sentence(@text, @translated)
+
+    it 'works', ->
+      assert @sentence.getTranslatedText() is @translated
+
   describe '#getWords', ->
     beforeEach ->
       @sentence = new Sentence('I am bouzuya.')
