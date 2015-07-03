@@ -4,17 +4,32 @@
   </h1>
 </header>
 <div class="content">
-  <form>
-    <div class="form-control">
-      <label>Text</label>
-      <input ng-model="c.text" />
-    </div>
-    <div class="form-control">
-      <label>Translated Text</label>
-      <input ng-model="c.translated" />
-    </div>
-    <button ng-click="c.add()">Add</button>
-  </form>
-  <st-sentence-list model="c.sentences">
-  </st-sentence-list>
+  <div class="sentences">
+    <h1>Add new sentence</h1>
+    <form>
+      <div class="form-control">
+        <label>Text</label>
+        <input ng-model="c.text" />
+      </div>
+      <div class="form-control">
+        <label>Translated Text</label>
+        <input ng-model="c.translated" />
+      </div>
+      <button ng-click="c.add()">Add</button>
+    </form>
+    <st-sentence-list model="c.sentences">
+    </st-sentence-list>
+  </div>
+
+  <div class="questions">
+    <h1>Questions</h1>
+    <button ng-click="c.generateQuestions()">
+      Generate
+    </button>
+    <ul>
+      <li ng-repeat="i in c.questions">
+        <span ng-bind="i.getText()"></span>
+      </li>
+    </ul>
+  </div>
 </div>

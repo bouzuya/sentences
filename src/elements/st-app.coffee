@@ -1,9 +1,11 @@
+{Question} = require '../models/question'
 {Sentence} = require '../models/sentence'
 
 class Controller
   constructor: ->
     @text = null
     @translated = null
+    @questions = []
     @sentences = [
       new Sentence('This is a pen.', 'これはペンです。')
     ,
@@ -14,6 +16,10 @@ class Controller
     @sentences.push new Sentence(@text, @translated)
     @text = null
     @translated = null
+
+  generateQuestions: (sentence) ->
+    @questions = @sentences.map (i) ->
+      new Question(i)
 
 module.exports = ->
   bindToController: true
