@@ -1,4 +1,4 @@
-# sentence
+# sentences
 
 ## Note
 
@@ -8,7 +8,7 @@
 - Build: gulp / browserify
 - Test: mocha / power-assert
 
-See: `[package.json](package.json)`
+See: [package.json](package.json)
 
 ## License
 
