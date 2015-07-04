@@ -8,6 +8,7 @@ describe 'SentenceService', ->
     it 'works', ->
       service1 = SentenceService.getInstance()
       service2 = SentenceService.getInstance()
+      assert service1
       assert service1 is service2
 
   describe '#addSentence', ->

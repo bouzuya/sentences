@@ -6,6 +6,7 @@ describe 'EventService', ->
     it 'works', ->
       service1 = EventService.getInstance()
       service2 = EventService.getInstance()
+      assert service1
       assert service1 is service2
 
   describe '#emit & #on', ->
