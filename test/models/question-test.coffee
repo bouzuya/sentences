@@ -3,6 +3,16 @@ assert = require 'power-assert'
 {Sentence} = require '../../src/models/sentence'
 
 describe 'Question', ->
+  describe '#answer', ->
+    beforeEach ->
+      @text = 'I am bouzuya.'
+      @sentence = new Sentence(@text)
+      @question = new Question(@sentence)
+
+    it 'works', ->
+      assert @question.answer @text
+      assert not @question.answer @text + '!!!'
+
   describe '#getSentence', ->
     beforeEach ->
       @text = 'I am bouzuya.'
