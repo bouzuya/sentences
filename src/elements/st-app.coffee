@@ -1,19 +1,31 @@
+{EventService} = require '../services/event-service'
 {Question} = require '../models/question'
-{Sentence} = require '../models/sentence'
+{SentenceService} = require '../services/sentence-service'
 
 class Controller
-  constructor: ->
+  @$inject: [
+    '$timeout'
+  ]
+
+  constructor: (@$timeout) ->
+    event = EventService.getInstance()
+    service = SentenceService.getInstance()
+
+    event.on 'sentence-service:changed', (sentences) =>
+      @$timeout => @sentences = sentences
+
     @text = null
     @translated = null
     @questions = []
-    @sentences = [
-      new Sentence('This is a pen.', 'これはペンです。')
-    ,
-      new Sentence('That is two bananas.', 'あれは2本のバナナです。')
-    ]
+    @sentences = []
+
+    # add some dummy data
+    service.addSentence('This is a pen.', 'これはペンです。')
+    service.addSentence('That is two bananas.', 'あれは2本のバナナです。')
 
   add: ->
-    @sentences.push new Sentence(@text, @translated)
+    service = SentenceService.getInstance()
+    service.addSentence(@text, @translated)
     @text = null
     @translated = null
 
