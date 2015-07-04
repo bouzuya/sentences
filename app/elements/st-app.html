@@ -29,6 +29,15 @@
     <ul>
       <li ng-repeat="i in c.questions">
         <span ng-bind="i.getText()"></span>
+        <input ng-model="c.answers[$index].text" />
+        <button ng-click="c.answer($index)">answer</button>
+        <span
+          class="is-correct"
+          ng-if="c.answers[$index].isCorrect !== null"
+          >
+          <span ng-if="c.answers[$index].isCorrect">OK</span>
+          <span ng-if="!c.answers[$index].isCorrect">NG</span>
+        </span>
       </li>
     </ul>
   </div>
