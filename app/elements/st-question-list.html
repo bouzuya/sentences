@@ -2,18 +2,7 @@
   <li ng-repeat="i in c.model">
     <st-question model="i">
     </st-question>
-    <form class="answer-form">
-      <div class="form-control">
-        <input ng-model="c.answers[$index].text" />
-        <button ng-click="c.answer($index)">Answer</button>
-      </div>
-    </form>
-    <span
-      class="is-correct"
-      ng-if="c.answers[$index].isCorrect !== null"
-      >
-      <span ng-if="c.answers[$index].isCorrect">OK</span>
-      <span ng-if="!c.answers[$index].isCorrect">NG</span>
-    </span>
+    <st-answer answer="c.answers[$index]">
+    </st-answer>
   </li>
 </ul>

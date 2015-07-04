@@ -4,6 +4,7 @@ angular
 .module 'app', [
   require('./templates').name
 ]
+.directive 'stAnswer', require './elements/st-answer'
 .directive 'stApp', require './elements/st-app'
 .directive 'stQuestion', require './elements/st-question'
 .directive 'stQuestionList', require './elements/st-question-list'

@@ -8,19 +8,14 @@ class Controller
 
   constructor: (@$timeout) ->
     event = EventService.getInstance()
-    @answers = [] # Array<{ text: String, isCorrect: boolean? }>
+    @answers = []
     event.on 'question-service:changed', (questions) =>
       @answers = questions.map (i) ->
-        text: null
         isCorrect: null
-
-  answer: (index) ->
-    service = QuestionService.getInstance()
-    questions = service.getQuestions()
-    question = questions[index]
-    answer = @answers[index]
-    answer.isCorrect = question.answer answer.text
-    @$timeout ->
+        question: i
+        words: i.getWords().map (text, index) ->
+          { index, text, selectedIndex: null }
+      @$timeout ->
 
 module.exports = ->
   bindToController: true
