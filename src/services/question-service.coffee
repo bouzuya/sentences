@@ -5,7 +5,7 @@ class QuestionService
   @instance: null
 
   @getInstance: ->
-    @instance = new QestionService() if @instance?
+    @instance = new QuestionService() unless @instance?
     @instance
 
   constructor: ->

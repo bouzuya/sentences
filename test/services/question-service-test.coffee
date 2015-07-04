@@ -8,6 +8,7 @@ describe 'QuestionService', ->
     it 'works', ->
       service1 = QuestionService.getInstance()
       service2 = QuestionService.getInstance()
+      assert service1
       assert service1 is service2
 
   describe '#generateFromSentences', ->
