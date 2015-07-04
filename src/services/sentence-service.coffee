@@ -14,8 +14,8 @@ class SentenceService
   addSentence: (text, translatedText) ->
     sentence = new Sentence(text, translatedText)
     @sentences.push sentence
-    service = EventService.getInstance()
-    service.emit 'sentence-service:changed', @sentences
+    event = EventService.getInstance()
+    event.emit 'sentence-service:changed', @sentences
 
   getSentences: ->
     @sentences
