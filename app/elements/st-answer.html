@@ -13,6 +13,7 @@
     <ul>
       <li ng-repeat="i in c.getSelectedWords()">
         <span ng-bind="i.text"></span>
+        <button ng-click="c.unselectWord(i)">unselect</button>
       </li>
     </ul>
   </div>

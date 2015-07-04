@@ -23,6 +23,12 @@ class Controller
       @answer.isCorrect = @answer.question.answer answerText
     @$timeout ->
 
+  unselectWord: (word) ->
+    word.selectedIndex = null
+    @getSelectedWords().forEach (i, index) ->
+      i.selectedIndex = index + 1
+    @$timeout ->
+
 module.exports = ->
   bindToController: true
   controller: Controller
