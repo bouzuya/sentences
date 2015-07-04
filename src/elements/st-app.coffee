@@ -30,7 +30,8 @@ class Controller
 
     # add some dummy data
     service.addSentence('This is a pen.', 'これはペンです。')
-    service.addSentence('That is two bananas.', 'あれは2本のバナナです。')
+    service.addSentence('He is bouzuya.', '彼はぼうずやです。')
+    service.addSentence('Cute is justice', 'かわいいは正義')
 
   add: ->
     service = SentenceService.getInstance()
