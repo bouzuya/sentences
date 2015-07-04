@@ -1,5 +1,5 @@
 {EventService} = require '../services/event-service'
-{Question} = require '../models/question'
+{QuestionService} = require '../services/question-service'
 {SentenceService} = require '../services/sentence-service'
 
 class Controller
@@ -10,6 +10,9 @@ class Controller
   constructor: (@$timeout) ->
     event = EventService.getInstance()
     service = SentenceService.getInstance()
+
+    event.on 'question-service:changed', (questions) =>
+      @$timeout => @questions = questions
 
     event.on 'sentence-service:changed', (sentences) =>
       @$timeout => @sentences = sentences
@@ -30,8 +33,8 @@ class Controller
     @translated = null
 
   generateQuestions: (sentence) ->
-    @questions = @sentences.map (i) ->
-      new Question(i)
+    service = QuestionService.getInstance()
+    service.generateFromSentences @sentences
 
 module.exports = ->
   bindToController: true
