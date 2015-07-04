@@ -13,18 +13,13 @@ class Controller
     service = SentenceService.getInstance()
 
     event.on 'question-service:changed', (questions) =>
-      @$timeout =>
-        @questions = questions
-        @answers = questions.map (i) ->
-          text: null
-          isCorrect: null
+      @$timeout => @questions = questions
 
     event.on 'sentence-service:changed', (sentences) =>
       @$timeout => @sentences = sentences
 
     @text = null
     @translated = null
-    @answers = [] # Array<{ text: String, isCorrect: boolean? }>
     @questions = [] # Array<Question>
     @sentences = [] # Array<Sentence>
 
@@ -38,12 +33,6 @@ class Controller
     service.addSentence(@text, @translated)
     @text = null
     @translated = null
-
-  answer: (index) ->
-    question = @questions[index]
-    answer = @answers[index]
-    answer.isCorrect = question.answer answer.text
-    @$timeout ->
 
   generateQuestions: (sentence) ->
     service = QuestionService.getInstance()
