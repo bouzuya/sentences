@@ -12,6 +12,9 @@ describe 'EventService', ->
     beforeEach ->
       @service = EventService.getInstance()
 
+    afterEach ->
+      @service.removeAllListeners()
+
     it 'works', (done) ->
       @service.on 'service:event-name', (obj) ->
         assert obj.key is 'value'
