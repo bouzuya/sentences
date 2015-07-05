@@ -40,3 +40,26 @@ describe 'SentenceService', ->
         new Sentence('text 1', 'translated 1')
         new Sentence('text 2', 'translated 2')
       ]
+
+  describe '#importSentences', ->
+    beforeEach ->
+      @event = EventService.getInstance()
+      @service = new SentenceService()
+      @text = 'I am bouzuya.'
+      @translated = 'ぼくぼうずや'
+      @json =
+        sentences: [
+          text: @text
+          translatedText: @translated
+        ]
+
+    afterEach ->
+      @event.removeAllListeners()
+
+    it 'works', (done) ->
+      @event.on 'sentence-service:changed', (sentences) =>
+        assert.deepEqual sentences, [
+          new Sentence(@text, @translated)
+        ]
+        done()
+      @service.importSentences JSON.stringify @json
