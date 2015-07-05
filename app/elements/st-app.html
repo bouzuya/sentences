@@ -16,14 +16,24 @@
         <input ng-model="c.translated" />
       </div>
       <button ng-click="c.add()">Add</button>
+    </form>
 
+    <form>
       <div class="form-control">
         <label>JSON</label>
         <textarea ng-model="c.json"></textarea>
       </div>
       <button ng-click="c.import()">Import</button>
-
     </form>
+
+    <form>
+      <button ng-click="c.export()">Export</button>
+      <div class="form-control">
+        <label>JSON</label>
+        <textarea ng-model="c.exported"></textarea>
+      </div>
+    </form>
+
     <st-sentence-list model="c.sentences">
     </st-sentence-list>
   </div>
