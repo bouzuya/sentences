@@ -18,6 +18,7 @@ class Controller
     event.on 'sentence-service:changed', (sentences) =>
       @$timeout => @sentences = sentences
 
+    @json = null
     @text = null
     @translated = null
     @questions = [] # Array<Question>
@@ -37,6 +38,11 @@ class Controller
   generateQuestions: (sentence) ->
     service = QuestionService.getInstance()
     service.generateFromSentences @sentences
+
+  import: ->
+    service = SentenceService.getInstance()
+    service.importSentences @json
+    @json = null
 
 module.exports = ->
   bindToController: true
