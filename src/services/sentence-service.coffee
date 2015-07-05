@@ -17,6 +17,14 @@ class SentenceService
     event = EventService.getInstance()
     event.emit 'sentence-service:changed', @sentences
 
+  exportSentences: ->
+    json =
+      version: '0.0.0'
+      sentences: @sentences.map (i) ->
+        text: i.getText()
+        translatedText: i.getTranslatedText()
+    JSON.stringify json
+
   getSentences: ->
     @sentences
 

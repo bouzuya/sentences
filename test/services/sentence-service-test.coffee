@@ -29,6 +29,23 @@ describe 'SentenceService', ->
         done()
       @service.addSentence @text, @translated
 
+  describe '#exportSentences', ->
+    beforeEach ->
+      @service = new SentenceService()
+      @service.addSentence 'text 1', 'translated 1'
+      @service.addSentence 'text 2', 'translated 2'
+
+    it 'works', ->
+      assert.deepEqual JSON.parse(@service.exportSentences()),
+        version: '0.0.0'
+        sentences: [
+          text: 'text 1'
+          translatedText: 'translated 1'
+        ,
+          text: 'text 2'
+          translatedText: 'translated 2'
+        ]
+
   describe '#getSentences', ->
     beforeEach ->
       @service = new SentenceService()
