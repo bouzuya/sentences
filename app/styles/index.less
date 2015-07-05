@@ -1,0 +1,37 @@
+@import "./colors";
+
+@import "./reset";
+@import "./base";
+
+header {
+  margin: 0 auto;
+  width: 980px;
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+
+    a {
+      color: @title-link-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.sentences,
+.questions {
+  margin: 64px auto;
+  width: 980px;
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+}
+
+.sentences {
+  .word-list {
+    display: none;
+  }
+}
