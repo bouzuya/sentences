@@ -7,6 +7,8 @@ del = require 'del'
 espower = require 'gulp-espower'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+less = require 'gulp-less'
+minifyCss = require 'gulp-minify-css'
 mocha = require 'gulp-mocha'
 run = require 'run-sequence'
 source = require 'vinyl-source-stream'
@@ -30,6 +32,7 @@ ignoreError = (stream) ->
 
 gulp.task 'build', (done) ->
   run.apply run, [
+    'build:less'
     'build:template'
     'build:html'
     'build:coffee'
@@ -39,6 +42,7 @@ gulp.task 'build', (done) ->
 
 gulp.task 'build(dev)', (done) ->
   run.apply run, [
+    'build:less(dev)'
     'build:template'
     'build:html'
     'build:coffee(dev)'
@@ -81,6 +85,17 @@ gulp.task 'build:js(dev)', ->
   .pipe buffer()
   .pipe sourcemaps.init loadMaps: true
   .pipe sourcemaps.write './'
+  .pipe gulp.dest dirs.dist
+
+gulp.task 'build:less', ->
+  gulp.src dirs.app + 'styles/index.less'
+  .pipe less()
+  .pipe minifyCss()
+  .pipe gulp.dest dirs.dist
+
+gulp.task 'build:less(dev)', ->
+  gulp.src dirs.app + 'styles/index.less'
+  .pipe ignoreError less()
   .pipe gulp.dest dirs.dist
 
 gulp.task 'build:template', ->
@@ -150,6 +165,15 @@ gulp.task 'watch', ['build(dev)'], ->
       'build:html'
       'build:template'
       ->
+    ]
+
+  watch [
+    dirs.app + '**/*.less'
+  ], ->
+    run.apply run, [
+      'build:less(dev)'
+      ->
+        browserSync.reload()
     ]
 
   browserSync
