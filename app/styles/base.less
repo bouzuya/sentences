@@ -1,0 +1,46 @@
+@import "./colors";
+
+body {
+  color: @color;
+}
+
+a {
+  color: @link-color;
+}
+
+label {
+  display: block;
+
+  &:after {
+    content: ":";
+  }
+}
+
+input {
+  border: 2px solid @textbox-border-color;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 2px;
+  background-color: @textbox-background-color;
+  line-height: 2;
+  padding: 4px 16px;
+  margin: 4px 0;
+}
+
+button {
+  border: 2px solid @button-border-color;
+  border-radius: 2px;
+  background-color: @button-background-color;
+  line-height: 2;
+  padding: 4px 16px;
+  margin: 4px 0;
+}
+
+li {
+  line-height: 2;
+}
+
+p {
+  line-height: 2;
+}
