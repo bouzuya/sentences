@@ -38,8 +38,7 @@ class Controller
 
   export: ->
     service = SentenceService.getInstance()
-    json = service.exportSentences()
-    @exported = JSON.stringify json
+    @exported = service.exportSentences()
 
   generateQuestions: (sentence) ->
     service = QuestionService.getInstance()
