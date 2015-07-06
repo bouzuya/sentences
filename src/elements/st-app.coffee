@@ -2,6 +2,7 @@
 {QuestionService} = require '../services/question-service'
 {Sentence} = require '../models/sentence'
 {SentenceService} = require '../services/sentence-service'
+{StorageService} = require '../services/storage-service'
 
 class Controller
   @$inject: [
@@ -11,12 +12,22 @@ class Controller
   constructor: (@$timeout) ->
     event = EventService.getInstance()
     service = SentenceService.getInstance()
+    storage = StorageService.getInstance()
 
     event.on 'question-service:changed', (questions) =>
       @$timeout => @questions = questions
 
     event.on 'sentence-service:changed', (sentences) =>
+      # FIXME:
+      storage.save service.exportSentences()
       @$timeout => @sentences = sentences
+
+    event.on 'storage-service:loaded', (json) =>
+      service.importSentences json
+      @$timeout ->
+
+    event.on 'storage-service:saved', ->
+      console.log 'saved!'
 
     @exported = null
     @json = null
@@ -25,10 +36,7 @@ class Controller
     @questions = [] # Array<Question>
     @sentences = [] # Array<Sentence>
 
-    # add some dummy data
-    service.addSentence('This is a pen.', 'これはペンです。')
-    service.addSentence('He is bouzuya.', '彼はぼうずやです。')
-    service.addSentence('Cute is justice', 'かわいいは正義')
+    storage.load()
 
   add: ->
     service = SentenceService.getInstance()
