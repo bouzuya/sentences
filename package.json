@@ -31,7 +31,8 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
     "power-assert": "^0.11.0",
-    "run-sequence": "^1.1.1"
+    "run-sequence": "^1.1.1",
+    "sinon": "^1.15.4"
   },
   "homepage": "https://github.com/bouzuya/sentences",
   "license": "MIT",
