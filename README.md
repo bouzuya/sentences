@@ -6,7 +6,7 @@
 - Framework: AngularJS 1.4
 - Package Manager: npm
 - Build: gulp / browserify
-- Test: mocha / power-assert
+- Test: mocha / power-assert / sinon
 
 See: [package.json](package.json)
 
