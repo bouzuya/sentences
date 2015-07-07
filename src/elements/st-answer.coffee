@@ -29,6 +29,13 @@ class Controller
       i.selectedIndex = index + 1
     @$timeout ->
 
+  unselectLastWord: ->
+    words = @getSelectedWords()
+    return if words.length is 0
+    word = words[words.length - 1]
+    word.selectedIndex = null
+    @$timeout ->
+
 module.exports = ->
   bindToController: true
   controller: Controller
