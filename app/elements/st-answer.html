@@ -1,16 +1,22 @@
 <form class="answer-form">
   <div class="form-control">
-    <ul>
+    <ul class="answer-word-list">
       <li
         ng-if="i.selectedIndex === null"
         ng-repeat="i in c.answer.words"
         >
-        <span ng-bind="i.text"></span>
+        <span
+          ng-bind="i.text"
+          ng-click="c.selectWord(i)"
+          ></span>
         <button ng-click="c.selectWord(i)">select</button>
       </li>
     </ul>
 
-    <ul>
+    <ul
+      class="answer-selected-word-list"
+      ng-class="{ 'is-correct': c.answer.isCorrect, 'is-incorrect': c.answer.isCorrect === false }"
+      >
       <li ng-repeat="i in c.getSelectedWords()">
         <span ng-bind="i.text"></span>
       </li>
@@ -24,10 +30,3 @@
     </button>
   </div>
 </form>
-<span
-  class="is-correct"
-  ng-if="c.answer.isCorrect !== null"
-  >
-  <span ng-if="c.answer.isCorrect">OK</span>
-  <span ng-if="!c.answer.isCorrect">NG</span>
-</span>

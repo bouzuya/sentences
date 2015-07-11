@@ -3,6 +3,18 @@
 @import "./reset";
 @import "./base";
 
+.button(@color: transparent) {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 4px;
+  padding: 0 24px;
+  height: 48px;
+  border: 2px solid @color;
+  vertical-align: middle;
+  line-height: 48px - 2px * 2; // height - border-width * 2
+  cursor: pointer;
+}
+
 header {
   margin: 0 auto;
   width: 980px;
@@ -55,5 +67,81 @@ header {
 
   ul {
     clear: both;
+  }
+}
+
+.answer-form {
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  .answer-word-list {
+    &:after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+
+    li {
+      display: block;
+      float: left;
+      height: 100%;
+
+      span {
+        .button(#333);
+      }
+
+      button {
+        display: none;
+      }
+    }
+  }
+
+  .answer-selected-word-list {
+    float: left;
+    height: 48px;
+
+    &.is-correct {
+      &:after {
+        .button(transparent);
+
+        padding: 0;
+        color: #00f;
+        content: "O";
+      }
+    }
+
+    &.is-incorrect {
+      &:before {
+        .button(transparent);
+
+        padding: 0;
+        color: #f00;
+        content: "X";
+      }
+    }
+
+    li {
+      display: block;
+      float: left;
+      height: 100%;
+
+      span {
+        .button(transparent);
+
+        padding: 0;
+      }
+
+      button {
+        display: none;
+      }
+    }
+  }
+
+  .back-button {
+    display: inline-block;
+    margin: 0;
   }
 }
