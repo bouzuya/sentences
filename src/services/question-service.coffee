@@ -10,6 +10,7 @@ class QuestionService
 
   constructor: ->
     @questions = []
+    @selectedQuestion = null
 
   generateFromSentences: (sentences) ->
     @questions = sentences.map (i) ->
@@ -19,5 +20,11 @@ class QuestionService
 
   getQuestions: ->
     @questions
+
+  isSelectedQuestion: (question) ->
+    @selectedQuestion is question
+
+  selectQuestion: (question) ->
+    @selectedQuestion = question
 
 module.exports.QuestionService = QuestionService
